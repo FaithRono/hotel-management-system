@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <title>Rooms</title>
+    <style>
+        /* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Container */
+.container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.navbar h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.navbar nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar nav ul li {
+    display: inline;
+}
+
+.navbar nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.navbar nav ul li a:hover,
+.navbar nav ul li a.active {
+    background-color: #007BFF;
+}
+
+/* Main Content */
+.main-content {
+    padding: 40px 0;
+}
+
+/* Rooms Section */
+.rooms-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.rooms-section h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.room-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.room-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: calc(33.33% - 20px);
+    max-width: 300px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.room-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.room-card img {
+    width: 100%;
+    height: auto;
+}
+
+.room-card h3 {
+    font-size: 20px;
+    margin: 10px 0;
+    color: #333;
+}
+
+.room-card p {
+    font-size: 14px;
+    color: #666;
+    margin: 0 10px 15px;
+}
+
+.book-btn {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 20px;
+}
+
+.book-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+    border-radius: 8px;
+}
+
+.modal-content h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #333;
+}
+
+/* Payment Section */
+.payment-section {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.payment-section h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.payment-option {
+    margin: 10px 0;
+}
+
+.payment-option input {
+    margin-right: 10px;
+}
+
+.pay-btn {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 15px;
+}
+
+.pay-btn:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="navbar">
+            <h1>Manage Rooms</h1>
+            <nav>
+                <ul>
+                    <li><a href="frontdesk.html">Dashboard</a></li>
+                    <li><a href="bookings.html">Bookings</a></li>
+                    <li><a href="rooms.html" class="active">Rooms</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                   
+                    <li><a href="#" id="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <!-- Room Management Section -->
+            <section id="rooms" class="rooms-section">
+                <h2>Our Rooms</h2>
+                <div class="room-list">
+                    <!-- Room Cards -->
+                    <div class="room-card">
+                        <img src="./image/room-1.png" alt="Room 1">
+                        <h3>Deluxe Room</h3>
+                        <p>Enjoy your stay with a beautiful view and luxurious amenities.</p>
+                        <button class="book-btn">Book Now</button>
+                    </div>
+                    <div class="room-card">
+                        <img src="./image/room-2.png" alt="Room 2">
+                        <h3>Executive Suite</h3>
+                        <p>Perfect for business trips with ample space and facilities.</p>
+                        <button class="book-btn">Book Now</button>
+                    </div>
+                    <div class="room-card">
+                        <img src="./image/room-3.png" alt="Room 3">
+                        <h3>Executive Suite</h3>
+                        <p>Perfect for business trips with ample space and facilities.</p>
+                        <button class="book-btn">Book Now</button>
+                    </div>
+                    <div class="room-card">
+                        <img src="./image/room-4.png" alt="Room 4">
+                        <h3>Executive Suite</h3>
+                        <p>Perfect for business trips with ample space and facilities.</p>
+                        <button class="book-btn">Book Now</button>
+                    </div>
+                    <div class="room-card">
+                        <img src="./image/room-5.png" alt="Room 5">
+                        <h3>Executive Suite</h3>
+                        <p>Perfect for business trips with ample space and facilities.</p>
+                        <button class="book-btn">Book Now</button>
+                    </div>
+                    <div class="room-card">
+                        <img src="./image/room-6.png" alt="Room 6">
+                        <h3>Executive Suite</h3>
+                        <p>Perfect for business trips with ample space and facilities.</p>
+                        <button class="book-btn">Book Now</button>
+                    </div>
+                    <div class="room-card">
+                        <img src="assets/images/room2.jpg" alt="Room 7">
+                        <h3>Executive Suite</h3>
+                        <p>Perfect for business trips with ample space and facilities.</p>
+                        <button class="book-btn">Book Now</button>
+                    </div>
+                    <!-- More room cards can be added -->
+                </div>
+                
+        
+            <!-- Room Details Modal -->
+        <div id="roomDetailsModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Room Details</h2>
+                <div id="roomDetails">
+                    <!-- Dynamic Room Details will be inserted here -->
+                </div>
+                <!-- Payment Section -->
+                <div class="payment-section">
+                    <h3>Payment Information</h3>
+                    <form id="paymentForm">
+                        <!-- Credit Card Option -->
+                        <div class="payment-option">
+                            <input type="radio" id="creditCard" name="paymentMethod" value="Credit Card" checked>
+                            <label for="creditCard">
+                                <i class="fas fa-credit-card"></i> Credit Card
+                            </label>
+                        </div>
+                        <div class="payment-details" id="creditCardDetails">
+                            <label for="cardNumber">Card Number:</label>
+                            <input type="text" id="cardNumber" name="cardNumber" placeholder="XXXX-XXXX-XXXX-XXXX" required>
+                            
+                            <label for="cardExpiry">Expiry Date:</label>
+                            <input type="text" id="cardExpiry" name="cardExpiry" placeholder="MM/YY" required>
+                            
+                            <label for="cardCVV">CVV:</label>
+                            <input type="text" id="cardCVV" name="cardCVV" placeholder="XXX" required>
+                        </div>
+        
+                        <!-- PayPal Option -->
+                        <div class="payment-option">
+                            <input type="radio" id="paypal" name="paymentMethod" value="PayPal">
+                            <label for="paypal">
+                                <i class="fab fa-paypal"></i> PayPal
+                            </label>
+                        </div>
+                        
+                        <!-- Mobile Payment Option -->
+                        <div class="payment-option">
+                            <input type="radio" id="mobilePayment" name="paymentMethod" value="Mobile Payment">
+                            <label for="mobilePayment">
+                                <i class="fas fa-mobile-alt"></i> Mobile Payment (M-Pesa)
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="pay-btn">Proceed to Payment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            document.getElementById('paymentForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+            
+                // Get selected payment method
+                const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            
+                // Validate form inputs
+                if (paymentMethod === 'Credit Card') {
+                    const cardNumber = document.getElementById('cardNumber').value;
+                    const cardExpiry = document.getElementById('cardExpiry').value;
+                    const cardCVV = document.getElementById('cardCVV').value;
+            
+                    if (!cardNumber || !cardExpiry || !cardCVV) {
+                        alert('Please fill in all Credit Card fields.');
+                        return;
+                    }
+                }
+            
+                // Collect form data
+                const formData = new FormData(this);
+            
+                // Example: Sending data to your backend
+                fetch('/api/process-payment', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Payment successful!');
+                        // Optionally, close the modal or redirect
+                        document.getElementById('roomDetailsModal').style.display = 'none';
+                    } else {
+                        alert('Payment failed. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
+                });
+            });
+            
+            // Close modal when clicking the close button
+            document.querySelector('.close').addEventListener('click', function() {
+                document.getElementById('roomDetailsModal').style.display = 'none';
+            });
+            </script>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

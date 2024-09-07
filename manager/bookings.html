@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookings</title>
+    <!-- Include Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        /* General Reset and Body Styling */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1em;
+}
+
+/* Navbar Styling */
+.navbar {
+    background-color: #333;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar h1 {
+    margin: 0;
+}
+
+.navbar nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar nav ul li {
+    margin: 0 1em;
+}
+
+.navbar nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar nav ul li a.active, 
+.navbar nav ul li a:hover {
+    color: #f4f4f4;
+    border-bottom: 2px solid #fff;
+}
+
+/* Main Content Styling */
+.main-content {
+    margin-top: 2em;
+}
+
+.card {
+    background: #fff;
+    padding: 1.5em;
+    margin-bottom: 1em;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin: 0.5em 0 0.2em;
+    font-weight: bold;
+}
+
+input[type="text"], 
+input[type="tel"], 
+input[type="email"], 
+input[type="number"], 
+select, 
+textarea {
+    padding: 0.5em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 1em;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+button {
+    padding: 0.7em 1.2em;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Kids Selection Styling */
+.kids-selection {
+    margin: 0.5em 0;
+}
+
+.kids-selection input[type="radio"] {
+    margin-right: 0.5em;
+}
+
+.kids-info {
+    margin: 1em 0;
+}
+
+.kids-info.hidden {
+    display: none;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1em;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    
+}
+
+th, td {
+    padding: 0.7em;
+    text-align: left;
+}
+
+thead {
+    background-color: #333;
+    color: #fff;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1em 0;
+    text-align: center;
+    margin-top: 2em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar nav ul {
+        flex-direction: row;
+        align-items: center;
+        
+      
+    }
+
+    .navbar nav ul li {
+        margin: 0.5em 1.5em;
+    }
+
+    .container {
+        width: 95%;
+    }
+}
+
+@media (max-width: 480px) {
+    button {
+        font-size: 0.9em;
+        padding: 0.5em 1em;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="navbar">
+        <div class="container">
+            <h1>Bookings</h1>
+            <nav>
+                <ul>
+                    <li><a href="manager.html">Dashboard</a></li>
+                    <li><a href="bookings.html" class="active">Bookings</a></li>
+                    <li><a href="rooms.html">Rooms</a></li>
+                    <li><a href="billing.html">Billing</a></li>
+                    <li><a href="reports.html">Reports</a></li>
+                   
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="main-content">
+        <!-- New Booking Section -->
+        <section class="card new-booking">
+            <h2>Create New Booking</h2>
+            <form id="new-booking-form">
+                <label for="guest-name">Guest Name:</label>
+                <input type="text" id="guest-name" name="guest-name" placeholder="Enter guest name" required>
+
+                <label for="contact">Contact Number:</label>
+                <input type="tel" id="contact" name="contact" placeholder="Enter contact number" required>
+
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" placeholder="Enter email address" required>
+
+                <label for="room-type">Room Type:</label>
+                <select id="room-type" name="room-type" required>
+                    <option value="single">Single</option>
+                    <option value="double">Double</option>
+                    <option value="suite">Suite</option>
+                </select>
+
+                <label for="check-in">Check-In Date:</label>
+                <input type="text" id="check-in" name="check-in" required>
+
+                <label for="check-out">Check-Out Date:</label>
+                <input type="text" id="check-out" name="check-out" required>
+
+                <label for="kids">Are Kids Included?</label>
+                <div class="kids-selection">
+                    <input type="radio" id="kids-yes" name="kids" value="yes">
+                    <label for="kids-yes">Yes</label>
+                    <input type="radio" id="kids-no" name="kids" value="no" checked>
+                    <label for="kids-no">No</label>
+                </div>
+
+                <div id="kids-info" class="kids-info hidden">
+                    <label for="number-of-kids">Number of Kids:</label>
+                    <input type="number" id="number-of-kids" name="number-of-kids" placeholder="Enter number of kids" min="1">
+                </div>
+
+                <button type="submit">Add Booking</button>
+            </form>
+        </section>
+
+        <!-- Booking List Section -->
+        <section class="card booking-list">
+            <h2>Booking List</h2>
+            <table id="booking-table">
+                <thead>
+                    <tr>
+                        <th>Guest Name</th>
+                        <th>Room Type</th>
+                        <th>Check-In Date</th>
+                        <th>Check-Out Date</th>
+                        <th>Kids</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Example rows -->
+                    <tr>
+                        <td>John Doe</td>
+                        <td>Double</td>
+                        <td>2024-09-01</td>
+                        <td>2024-09-05</td>
+                        <td>No</td>
+                        <td><button>Edit</button> <button>Cancel</button> <button>Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td>Jane Smith</td>
+                        <td>Suite</td>
+                        <td>2024-09-03</td>
+                        <td>2024-09-07</td>
+                        <td>Yes (2 kids)</td>
+                        <td><button>Edit</button> <button>Cancel</button> <button>Delete</button></td>
+                    </tr>
+                    <!-- More rows can be dynamically added -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Hotel Management System</p>
+    </footer>
+
+    <!-- Include Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        // Initialize Flatpickr for date input fields
+        flatpickr("#check-in", {
+            dateFormat: "Y-m-d",
+            minDate: "today"
+        });
+
+        flatpickr("#check-out", {
+            dateFormat: "Y-m-d",
+            minDate: "today"
+        });
+
+        // Handle kids selection
+        const kidsYes = document.getElementById('kids-yes');
+        const kidsNo = document.getElementById('kids-no');
+        const kidsInfo = document.getElementById('kids-info');
+
+        kidsYes.addEventListener('change', () => {
+            kidsInfo.classList.remove('hidden');
+        });
+
+        kidsNo.addEventListener('change', () => {
+            kidsInfo.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>

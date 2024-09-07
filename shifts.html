@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shift Planner</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- FullCalendar CSS -->
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/core/main.min.css' rel='stylesheet' />
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/daygrid/main.min.css' rel='stylesheet' />
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/timegrid/main.min.css' rel='stylesheet' />
+</head>
+<body>
+    <div class="container">
+        <header class="navbar">
+            <h1>Shift Planner</h1>
+            <nav>
+                <ul>
+                    <li><a href="frontdesk.html">Dashboard</a></li>
+                    <li><a href="bookings.html">Bookings</a></li>
+                    <li><a href="rooms.html">Rooms</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="#" id="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <!-- Shift Planner Section -->
+            <section class="card shift-planner">
+                <h2>Shift Planner</h2>
+                <div id="calendar"></div>
+                <button onclick="showAddShiftModal()">Add Shift</button>
+            </section>
+        </main>
+    </div>
+
+    <!-- Add/Edit Shift Modal -->
+    <div id="shift-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeShiftModal()">&times;</span>
+            <h2>Add/Edit Shift</h2>
+            <form id="shift-form">
+                <label for="shift-title">Title:</label>
+                <input type="text" id="shift-title" name="title" required />
+
+                <label for="shift-start">Start Time:</label>
+                <input type="datetime-local" id="shift-start" name="start" required />
+
+                <label for="shift-end">End Time:</label>
+                <input type="datetime-local" id="shift-end" name="end" required />
+
+                <input type="hidden" id="shift-id" name="id" />
+
+                <button type="submit">Save Shift</button>
+            </form>
+        </div>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/core/main.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/daygrid/main.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/timegrid/main.min.js'></script>
+    <script src="script.js"></script>
+</body>
+</html>

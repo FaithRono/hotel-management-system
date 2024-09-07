@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Hotel Management System</title>
+    <style>
+        /* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Container for the whole page */
+body {
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    padding-top: 60px; /* Offset for sticky navbar */
+    margin: 0;
+}
+
+/* Sticky Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.navbar h1 {
+    font-size: 24px;
+}
+
+.navbar nav {
+    display: flex;
+    align-items: center;
+}
+
+.navbar nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 15px;
+    padding: 5px 9px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.navbar nav a:hover {
+    background-color: #555;
+}
+
+.navbar nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar nav ul li {
+    margin: 0 10px;
+}
+
+.main-content {
+    margin-top: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.profile {
+    background: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 8px;
+    max-width: 600px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile h2 {
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+#profileForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#profileForm label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#profileForm input,
+#profileForm textarea,
+#profileForm select {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 1em;
+    width: 100%;
+}
+
+#profileForm button {
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+#profileForm button:hover {
+    background-color: #555;
+}
+
+.profile-pic {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+#imagePreview img {
+    margin-top: 10px;
+    max-width: 150px;
+    border-radius: 50%;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .navbar .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .navbar nav ul {
+        flex-direction: row;
+        margin-top: 10px;
+    }
+
+    .navbar nav ul li {
+        margin-bottom: 10px;
+    }
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 30px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+    </style>
+</head>
+<body>
+    <!-- Sticky Navbar -->
+    <header class="navbar">
+        <div class="container">
+            <h1>Profile</h1>
+            <nav>
+               
+                <ul>
+                    <li><a href="frontdesk.html" class="active">Dashboard</a></li>
+                    <li><a href="bookings.html">Bookings</a></li>
+                    <li><a href="rooms.html">Rooms</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                   
+                    <li><a href="index.html" id="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="profile">
+        <h2>Update Profile</h2>
+        <!-- Profile Form -->
+        <form id="profileForm" enctype="multipart/form-data">
+            <div class="profile-pic">
+                <label for="profilePicture">Profile Picture:</label>
+                <input type="file" id="profilePicture" name="profilePicture" accept="image/*" onchange="previewImage(event)">
+                <div id="imagePreview"></div>
+            </div>
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" placeholder="Enter your age" required>
+
+            <label for="bio">Bio:</label>
+            <textarea id="bio" name="bio" placeholder="Tell us about yourself"></textarea>
+
+            <label for="role">Role:</label>
+            <select id="role" name="role" required>
+                <option value="admin">Admin</option>
+                <option value="manager">Manager</option>
+                <option value="front-desk">Front Desk</option>
+                <option value="staff">Staff</option>
+                <option value="housekeeping">Housekeeping</option>
+            </select>
+
+            <button type="submit">Save Profile</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Hotel Management System</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Preview the uploaded image
+        function previewImage(event) {
+            const imagePreview = document.getElementById('imagePreview');
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.innerHTML = `<img src="${e.target.result}" alt="Profile Picture" style="max-width: 150px; border-radius: 50%;">`;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Logout function
+        function logout() {
+            window.location.href = 'index.html'; // Redirect to the landing page
+        }
+
+        // Handle form submission
+        document.getElementById('profileForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Profile saved successfully!');
+            // Implement actual save functionality here
+        });
+    </script>
+</body>
+</html>

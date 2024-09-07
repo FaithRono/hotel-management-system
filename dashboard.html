@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Staff Dashboard</title>
+    
+</head>
+<body>
+    <header class="navbar">
+        <h1>Hotel Staff Management</h1>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <!-- Links are here for navigation, but they will be hidden or inactive before login -->
+                <li><a href="staff-profiles.html" class="hidden">Staff Profiles</a></li>
+                <li><a href="shift-scheduling.html" class="hidden">Shift Scheduling</a></li>
+                <li><a href="task-management.html" class="hidden">Task Management</a></li>
+                <li><a href="communication.html" class="hidden">Communication</a></li>
+                <li><a href="performance.html" class="hidden">Performance</a></li>
+                <li><a href="payroll.html" class="hidden">Payroll</a></li>
+                <li><a href="emergency.html" class="hidden">Emergency</a></li>
+                <li><a href="training.html" class="hidden">Training</a></li>
+                <li><a href="reports.html" class="hidden">Reports</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main-content">
+        <!-- Login Section -->
+        <section id="login" class="card">
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <label for="role">Select Role:</label>
+                <select id="role" name="role" required>
+                    <option value="" disabled selected>Select your role</option>
+                    <option value="cook">Cook</option>
+                    <option value="waiter">Waiter</option>
+                    <option value="bar-attendant">Bar Attendant</option>
+                    <option value="other">Other Staff</option>
+                </select>
+                <button type="submit">Login</button>
+            </form>
+        </section>
+
+        <!-- Dashboard Overview -->
+        <section id="dashboard-overview" class="card hidden">
+            <h2>Dashboard Overview</h2>
+            <div class="metrics">
+                <div class="metric">
+                    <h3>Total Bookings</h3>
+                    <p id="total-bookings">20</p>
+                </div>
+                <div class="metric">
+                    <h3>Available Rooms</h3>
+                    <p id="available-rooms">5</p>
+                </div>
+                <div class="metric">
+                    <h3>Checked-In Guests</h3>
+                    <p id="checked-in-guests">10</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Links -->
+        <section id="quick-links" class="card hidden">
+            <h2>Quick Links</h2>
+            <ul>
+                <li><a href="staff-profiles.html">View Staff Profiles</a></li>
+                <li><a href="shift-scheduling.html">Manage Shifts</a></li>
+                <li><a href="task-management.html">Task Management</a></li>
+                <li><a href="communication.html">Communication Center</a></li>
+                <li><a href="performance.html">Performance Reviews</a></li>
+            </ul>
+        </section>
+
+        <!-- Recent Notifications -->
+        <section id="notifications" class="card hidden">
+            <h2>Recent Notifications</h2>
+            <ul>
+                <li>Staff meeting scheduled for 3 PM today.</li>
+                <li>New training session on customer service next week.</li>
+                <li>Reminder: Check out time is at 11 AM.</li>
+            </ul>
+        </section>
+    </main>
+
+<script src="script.js"></script>
+</body>
+</html>

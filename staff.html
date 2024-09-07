@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Staff Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="navbar">
+            <h1>Hotel Staff Management</h1>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="#staff-profiles" class="active">Staff Profiles</a></li>
+                    <li><a href="#shift-scheduling">Shift Scheduling</a></li>
+                    <li><a href="#task-management">Task Management</a></li>
+                    <li><a href="#communication">Communication</a></li>
+                    <li><a href="#performance">Performance</a></li>
+                    
+                    <li><a href="#emergency">Emergency</a></li>
+                   
+                    <li><a href="#reports">Reports</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <!-- Staff Profiles -->
+            <section id="staff-profiles" class="card">
+                <h2>Staff Profiles</h2>
+                <div class="profile-list">
+                    <!-- Sample Profile -->
+                    <div class="profile-item">
+                        <h3>John Doe</h3>
+                        <p>Role: Front Desk Clerk</p>
+                        <p>Email: john.doe@example.com</p>
+                        <p>Phone: +123-456-7890</p>
+                        <p>Hire Date: January 15, 2022</p>
+                        <button onclick="editProfile('John Doe')">Edit Profile</button>
+                    </div>
+                   
+                </div>
+            </section>
+
+            <!-- Shift Scheduling -->
+            <section id="shift-scheduling" class="card">
+                <h2>Shift Scheduling</h2>
+                <button onclick="showShiftSchedule()">View Schedule</button>
+                <button onclick="requestShiftChange()">Request Shift Change</button>
+                <div id="shift-schedule">
+                    <h3>Upcoming Shifts</h3>
+                    <ul>
+                        <li>John Doe: September 10, 2024, 09:00 - 17:00</li>
+                        <li>Jane Smith: September 11, 2024, 10:00 - 18:00</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Task Management -->
+            <section id="task-management" class="card">
+                <h2>Task Management</h2>
+                <button onclick="assignTask()">Assign Task</button>
+                <button onclick="viewTasks()">View Tasks</button>
+                <button onclick="viewTaskHistory()">Task History</button>
+                <div id="task-list">
+                    <h3>Current Tasks</h3>
+                    <ul>
+                        <li>Clean Room 101 - Assigned to Jane Smith</li>
+                        <li>Prepare Breakfast - Assigned to John Doe</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Communication -->
+            <section id="communication" class="card">
+                <h2>Communication</h2>
+                <button onclick="sendMessage()">Send Message</button>
+                <button onclick="viewAnnouncements()">View Announcements</button>
+                <div id="announcements">
+                    <h3>Latest Announcements</h3>
+                    <p>No new announcements.</p>
+                </div>
+            </section>
+
+            <!-- Performance -->
+            <section id="performance" class="card">
+                <h2>Performance Monitoring</h2>
+                <button onclick="viewPerformanceReviews()">View Reviews</button>
+                <button onclick="viewKPIs()">View KPIs</button>
+                <button onclick="trainingNeeds()">Training Needs</button>
+                <div id="performance-reviews">
+                    <h3>Recent Reviews</h3>
+                    <ul>
+                        <li>John Doe - Exceeds Expectations</li>
+                        <li>Jane Smith - Meets Expectations</li>
+                    </ul>
+                </div>
+            </section>
+
+           
+
+            <!-- Emergency -->
+            <section id="emergency" class="card">
+                <h2>Emergency Procedures</h2>
+                <button onclick="viewEmergencyContacts()">View Contacts</button>
+                <button onclick="viewEmergencyProtocols()">View Protocols</button>
+                <div id="emergency-contacts">
+                    <h3>Emergency Contacts</h3>
+                    <ul>
+                        <li>Police - 911</li>
+                        <li>Fire Department - 911</li>
+                        <li>Hospital - +123-456-7892</li>
+                    </ul>
+                </div>
+            </section>
+
+           
+            <!-- Reports -->
+            <section id="reports" class="card">
+                <h2>Reports and Analytics</h2>
+                <button onclick="viewAttendanceReports()">View Attendance</button>
+                <button onclick="viewPerformanceReports()">View Performance</button>
+                <button onclick="viewFinancialReports()">View Financial</button>
+                <div id="reports-summary">
+                    <h3>Recent Reports</h3>
+                    <ul>
+                        <li>Attendance Report - September 2024</li>
+                        <li>Performance Report - August 2024</li>
+                        <li>Financial Report - Q3 2024</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

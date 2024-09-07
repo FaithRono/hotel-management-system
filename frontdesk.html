@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Front Desk Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header.navbar {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header.navbar h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        header.navbar nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        header.navbar nav ul li {
+            margin: 0 10px;
+        }
+
+        header.navbar nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        header.navbar nav ul li a.active {
+            border-bottom: 2px solid #fff;
+        }
+
+        .main-content {
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .overview__stats {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .stat {
+            flex: 1;
+            margin-right: 20px;
+            text-align: center;
+        }
+
+        .stat:last-child {
+            margin-right: 0;
+        }
+
+        .stat h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .stat p {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .recent-activity ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .recent-activity li {
+            margin-bottom: 10px;
+        }
+
+        .room-status {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .status-card {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .status-card h3 {
+            margin-top: 0;
+        }
+
+        .status-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .status-card li {
+            margin-bottom: 10px;
+        }
+
+        .status-card img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        .booking-calendar {
+            position: relative;
+        }
+
+        #calendar {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .room-gallery {
+            position: relative;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .gallery-item {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .gallery-item img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        .gallery-item p {
+            margin-top: 5px;
+        }
+
+        .contact-section {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-section form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-section label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .contact-section input,
+        .contact-section textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .contact-section button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .contact-section button:hover {
+            background-color: #0056b3;
+        }
+
+        .contact__info {
+            margin-top: 20px;
+        }
+
+        .contact__info h3 {
+            margin-top: 0;
+        }
+
+        .contact__info ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contact__info li {
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .overview__stats {
+                flex-direction: column;
+            }
+
+            .stat {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .room-status {
+                flex-direction: column;
+            }
+
+            .status-card {
+                min-width: auto;
+                margin-bottom: 20px;
+            }
+
+            .gallery {
+                flex-direction: column;
+            }
+
+            .gallery-item {
+                min-width: auto;
+            }
+        }
+    </style>
+    <!-- FullCalendar CSS -->
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/core/main.min.css' rel='stylesheet' />
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/daygrid/main.min.css' rel='stylesheet' />
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/timegrid/main.min.css' rel='stylesheet' />
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/list/main.min.css' rel='stylesheet' />
+</head>
+<body>
+    <div class="container">
+        <header class="navbar">
+            <h1>Front Desk</h1>
+            <nav>
+                <ul>
+                    <li><a href="frontdesk.html" class="active">Dashboard</a></li>
+                    <li><a href="bookings.html">Bookings</a></li>
+                    <li><a href="rooms.html">Rooms</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="#" id="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <!-- Dashboard Overview Section -->
+            <section class="card overview">
+                <h2>Dashboard Overview</h2>
+                <div class="overview__stats">
+                    <div class="stat">
+                        <h3>Total Bookings</h3>
+                        <p>20</p> <!-- Replace with dynamic data -->
+                    </div>
+                    <div class="stat">
+                        <h3>Available Rooms</h3>
+                        <p>5</p> <!-- Replace with dynamic data -->
+                    </div>
+                    <div class="stat">
+                        <h3>Checked-In Guests</h3>
+                        <p>10</p> <!-- Replace with dynamic data -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Activity Section -->
+            <section class="card recent-activity">
+                <h2>Recent Activity</h2>
+                <ul>
+                    <li>Guest John Doe checked in to Room 101.</li>
+                    <li>Booking by Jane Smith confirmed for Room 102.</li>
+                    <li>Room 103 cleaned and prepared for the next guest.</li>
+                </ul>
+            </section>
+
+            <!-- Room Status Overview Section -->
+            <section class="card room-status-overview">
+                <h2>Room Status Overview</h2>
+                <div class="room-status">
+                    <div class="status-card">
+                        <h3>Available Rooms</h3>
+                        <ul>
+                            <li>Room 101 <img src="./image/room-1.png" alt="Room 101"></li>
+                            <li>Room 102 <img src="./image/room-2.png" alt="Room 102"></li>
+                        </ul>
+                    </div>
+                    <div class="status-card">
+                        <h3>Dirty Rooms</h3>
+                        <ul>
+                            <li>Room 201 <img src="./image/room-3.png" alt="Room 201"></li>
+                        </ul>
+                    </div>
+                    <div class="status-card">
+                        <h3>Under Repair</h3>
+                        <ul>
+                            <li>Room 301 <img src="./image/room-4.png" alt="Room 301"></li>
+                        </ul>
+                    </div>
+                    <div class="status-card">
+                        <h3>Booked Rooms</h3>
+                        <ul>
+                            <li>Room 102 <img src="./image/room-6.png" alt="Room 102"></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Booking Calendar Section -->
+            <section class="card booking-calendar">
+                <h2>Booking Calendar</h2>
+                <div id="calendar"></div>
+            </section>
+
+            <!-- Room Gallery Section -->
+            <section class="card room-gallery">
+                <h2>Room Gallery</h2>
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="./image/room-1.png" alt="room-1">
+                        <p>Room 101</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./image/room-2.png" alt="Room 2">
+                        <p>Room 102</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./image/room-3.png" alt="Room 201">
+                        <p>Room 201</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="room301.jpg" alt="Room 301">
+                        <p>Room 301</p>
+                    </div>
+                    <!-- Add more gallery items as needed -->
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="contact-section">
+                <h2>Contact Us</h2>
+                <div class="contact__container">
+                    <form id="contactForm">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required />
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required />
+
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" rows="4" required></textarea>
+
+                        <button type="submit">Send</button>
+                    </form>
+                    <div class="contact__info">
+                        <h3>Contact Information:</h3>
+                        <ul>
+                            <li>Email: faithrono132@gmail.com</li>
+                            <li>Phone: +254 704728807</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- FullCalendar JS -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/core/main.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/daygrid/main.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/timegrid/main.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/list/main.min.js'></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                plugins: [ 'dayGrid', 'timeGrid', 'list' ],
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                },
+                initialView: 'dayGridMonth',
+                editable: true,
+                selectable: true,
+                events: [
+                    // Example events
+                    {
+                        title: 'Booking for Room 101',
+                        start: '2024-09-01',
+                        end: '2024-09-05'
+                    },
+                    {
+                        title: 'Room 102 Maintenance',
+                        start: '2024-09-03',
+                        end: '2024-09-04'
+                    }
+                ],
+                dateClick: function(info) {
+                    alert('Date clicked: ' + info.dateStr);
+                },
+                eventClick: function(info) {
+                    alert('Event: ' + info.event.title);
+                }
+            });
+            calendar.render();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Rooms</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="navbar">
+            <h1>Manage Rooms</h1>
+            <nav>
+                <ul>
+                    <li><a href="frontdesk.html">Dashboard</a></li>
+                    <li><a href="bookings.html">Bookings</a></li>
+                    <li><a href="rooms.html" class="active">Rooms</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="contact.html">Contact Manager</a></li>
+                    <li><a href="#" id="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <!-- Room Management Section -->
+            <section class="card">
+                <h2>Add or Update Room</h2>
+                <form id="room-form">
+                    <label for="room-number">Room Number:</label>
+                    <input type="text" id="room-number" name="room-number" placeholder="Enter room number" required>
+
+                    <label for="room-type">Room Type:</label>
+                        <select id="room-type" required>
+                            <option value="single">Single</option>
+                            <option value="double">Double</option>
+                            <option value="suite">Suite</option>
+                        </select>
+                    <label for="status">Room Status:</label>
+                    <select id="status" name="status" required>
+                        <option value="available">Available</option>
+                        <option value="dirty">Dirty</option>
+                        <option value="under-repair">Under Repair</option>
+                        <option value="booked">Booked</option>
+                    </select>
+
+                    <label for="room-photo">Room Photo:</label>
+                    <input type="file" id="room-photo" name="room-photo" accept="image/*">
+
+                    <button type="submit">Save Room</button>
+                </form>
+            </section>
+
+            <!-- Room Status Section -->
+            <section class="card">
+                <h2>Room Status Overview</h2>
+                <div class="room-status">
+                    <div class="status-card">
+                        <h3>Available Rooms</h3>
+                        <ul>
+                            <li>Room 101 <img src="room101.jpg" alt="Room 101"></li>
+                            <li>Room 102 <img src="room102.jpg" alt="Room 102"></li>
+                        </ul>
+                    </div>
+                    <div class="status-card">
+                        <h3>Dirty Rooms</h3>
+                        <ul>
+                            <li>Room 201 <img src="room201.jpg" alt="Room 201"></li>
+                        </ul>
+                    </div>
+                    <div class="status-card">
+                        <h3>Under Repair</h3>
+                        <ul>
+                            <li>Room 301 <img src="room301.jpg" alt="Room 301"></li>
+                        </ul>
+                    </div>
+                    <div class="status-card">
+                        <h3>Booked Rooms</h3>
+                        <ul>
+                            <li>Room 102 <img src="room102.jpg" alt="Room 102"></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

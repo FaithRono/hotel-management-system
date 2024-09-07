@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Dashboard</title>
+    <style>
+        /* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.navbar h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.navbar nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar nav ul li {
+    display: inline;
+}
+
+.navbar nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.navbar nav ul li a:hover,
+.navbar nav ul li a.active {
+    background-color: #007BFF;
+}
+
+.main-content {
+    margin: 20px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.card-header {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.card-content {
+    font-size: 16px;
+}
+
+form label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+form input, form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+form button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #2980b9;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+.room-status {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.status-card {
+    flex: 1;
+    min-width: 220px;
+}
+
+.status-card h3 {
+    margin-top: 0;
+}
+
+.status-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.status-card li {
+    margin-bottom: 10px;
+}
+
+.status-card img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <h1>Hotel Management</h1>
+        <nav>
+            <ul>
+                <li><a href="manager.html">Dashboard</a></li>
+                <li><a href="bookings.html">Bookings</a></li>
+                <li><a href="billing.html">Billing</a></li>
+                <li><a href="rooms.html">Rooms</a></li>
+                <li><a href="sales.html">Sales</a></li>
+                <li><a href="reports.html">Reports</a></li>
+
+                <li><a href="#" id="logout-btn">Logout</a></li>
+            </ul>
+        </nav>
+      
+    </header>
+
+    <main class="main-content">
+        <section id="overview">
+            <h2>Welcome, Manager</h2>
+            <p>Manage room allocation, oversee staff performance, and monitor daily hotel operations.</p>
+        </section>
+
+        <!-- Shift Planner Section -->
+        <section class="card shift-planner">
+            <h2>Shift Planner</h2>
+            <div id="calendar"></div>
+            <button onclick="showAddShiftModal()">Add Shift</button>
+            <div id="shift-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeShiftModal()">&times;</span>
+                    <h2>Add/Edit Shift</h2>
+                    <form id="shift-form">
+                        <label for="shift-title">Title:</label>
+                        <input type="text" id="shift-title" name="title" required />
+        
+                        <label for="shift-start">Start Time:</label>
+                        <input type="datetime-local" id="shift-start" name="start" required />
+        
+                        <label for="shift-end">End Time:</label>
+                        <input type="datetime-local" id="shift-end" name="end" required />
+        
+                        <input type="hidden" id="shift-id" name="id" />
+        
+                        <button type="submit">Save Shift</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        
+       
+    
+        <!-- Billing Section -->
+        
+            <div class="card">
+                <div class="card-header">Expense History</div>
+                <div class="card-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Bill Number</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Amount ($)</th>
+                                <th>Tax Amount ($)</th>
+                                <th>Discount ($)</th>
+                                <th>Total Amount ($)</th>
+                                <th>Date</th>
+                                <th>Payment Status</th>
+                                <th>Vendor/Supplier</th>
+                                <th>Payment Method</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Example Data -->
+                            <tr>
+                                <td>#001</td>
+                                <td>Food Supplies</td>
+                                <td>Food</td>
+                                <td>200</td>
+                                <td>10</td>
+                                <td>0</td>
+                                <td>210</td>
+                                <td>2024-09-01</td>
+                                <td>Paid</td>
+                                <td>ABC Groceries</td>
+                                <td>Credit Card</td>
+                                <td>Monthly restocking</td>
+                            </tr>
+                            <tr>
+                                <td>#002</td>
+                                <td>Room Repairs</td>
+                                <td>Maintenance</td>
+                                <td>500</td>
+                                <td>25</td>
+                                <td>50</td>
+                                <td>475</td>
+                                <td>2024-09-02</td>
+                                <td>Pending</td>
+                                <td>XYZ Maintenance Co.</td>
+                                <td>Bank Transfer</td>
+                                <td>Fixing water leakage</td>
+                            </tr>
+                            <tr>
+                                <td>#003</td>
+                                <td>Electricity Bill</td>
+                                <td>Utility</td>
+                                <td>300</td>
+                                <td>15</td>
+                                <td>0</td>
+                                <td>315</td>
+                                <td>2024-09-03</td>
+                                <td>Overdue</td>
+                                <td>Power Company</td>
+                                <td>Bank Transfer</td>
+                                <td>Due by end of month</td>
+                            </tr>
+                            <!-- More records will be dynamically populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+         <!-- Room Management Section -->
+         <section class="card">
+            <h2>Add/Update Room</h2>
+            <form id="room-form">
+                <label for="room-number">Room Number:</label>
+                <input type="text" id="room-number" name="room-number" placeholder="Enter room number" required>
+
+                <label for="room-type">Room Type:</label>
+                    <select id="room-type" required>
+                        <option value="single">Single</option>
+                        <option value="double">Double</option>
+                        <option value="suite">Suite</option>
+                    </select>
+                <label for="status">Room Status:</label>
+                <select id="status" name="status" required>
+                    <option value="available">Available</option>
+                    <option value="dirty">Dirty</option>
+                    <option value="under-repair">Under Repair</option>
+                    <option value="booked">Booked</option>
+                </select>
+
+                <label for="room-photo">Room Photo:</label>
+                <input type="file" id="room-photo" name="room-photo" accept="image/*">
+
+                <button type="submit">Add Room</button>
+            </form>
+        </section>
+
+         <!-- Room Status Overview Section -->
+         <section class="card room-status-overview">
+            <h2>Room Status Overview</h2>
+            <div class="room-status">
+                <div class="status-card">
+                    <h3>Available Rooms</h3>
+                    <ul>
+                        <li>Room 101 <img src="../image/room-1.png" alt="Room 101"></li>
+                        <li>Room 102 <img src="../image/room-2.png" alt="Room 102"></li>
+                    </ul>
+                </div>
+                <div class="status-card">
+                    <h3>Dirty Rooms</h3>
+                    <ul>
+                        <li>Room 201 <img src="../image/room-3.png" alt="Room 201"></li>
+                    </ul>
+                </div>
+                <div class="status-card">
+                    <h3>Under Repair</h3>
+                    <ul>
+                        <li>Room 301 <img src="../image/room-4.png" alt="Room 301"></li>
+                    </ul>
+                </div>
+                <div class="status-card">
+                    <h3>Booked Rooms</h3>
+                    <ul>
+                        <li>Room 102 <img src="../image/room-6.png" alt="Room 102"></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+       
+            <div class="card">
+                <div class="card-header">Room List</div>
+                <div class="card-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Room Number</th>
+                                <th>Room Type</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Example data -->
+                            <tr>
+                                <td>101</td>
+                                <td>Single</td>
+                                <td>Available</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reports Section -->
+        
+    </main>
+
+    <script>
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            // Logic to handle logout
+            window.location.href = 'index.html'; // Redirect to landing page
+        });
+
+        function addBooking() {
+            // Logic to add booking
+        }
+
+        function recordExpense() {
+            // Logic to record expense
+        }
+
+      
+
+       
+    </script>
+</body>
+</html>

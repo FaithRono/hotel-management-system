@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Management System - Sales</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .navbar {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar button {
+            background-color: #444;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .navbar button:hover {
+            background-color: #555;
+        }
+        .sales {
+            padding: 20px;
+        }
+        .sales-form input, .sales-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .sales-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .sales-form button:hover {
+            background-color: #218838;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h2>Sales</h2>
+        <nav>
+            <ul>
+                <li><a href="admin.html">Dashboard</a></li>
+                <li><a href="#bookings">Bookings</a></li>
+                <li><a href="billing.html">Billing</a></li>
+                <li><a href="rooms.html">Rooms</a></li>
+                <li><a href="sales.html" id="sales">Sales</a></li>
+                <li><a href="reports.html" id="reports">Reports</a></li>
+                <li><a href="#" id="users">Employees</a></li>
+                <li><a href="profile.html" id="profile-btn">Profile</a></li>
+                <li><a href="#" id="logout-btn">Logout</a></li>
+            </ul>
+        </nav>
+
+       
+    </div>
+    
+    <div class="sales">
+        <h3>Record a New Sale</h3>
+        <form class="sales-form">
+            <input type="text" placeholder="Item Name" required>
+            <input type="number" placeholder="Quantity Sold" required>
+            <input type="number" placeholder="Price per Item ($)" required>
+            <input type="date" placeholder="Date" required>
+            <button type="submit">Add Sale</button>
+        </form>
+        <h3>Sales Records</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Quantity Sold</th>
+                    <th>Price per Item ($)</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Sales records will be populated here -->
+            </tbody>
+        </table>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>
