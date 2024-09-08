@@ -5,43 +5,199 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reports - Hotel Management System</title>
     <style>
-        /* Styles for report display */
-.report-display {
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px solid #ddd;
+       /* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: #0077b6; /* Blue color for navbar */
+    color: white;
+    position: sticky; /* Sticky navbar */
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensures navbar is on top of other content */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 2rem;
+}
+
+.navbar h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.navbar nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar nav ul li {
+    padding: 0.5rem 0;
+}
+
+.navbar nav ul li a {
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.navbar nav ul li a:hover,
+.navbar nav ul li a.active {
+    background-color: #005f8d; /* Darker blue for hover and active */
     border-radius: 5px;
-    background-color: #f9f9f9;
+}
+
+/* Main Content Styles */
+main.reports {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.reports h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #0077b6;
+}
+
+/* Report Filters */
+.report-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+
+.report-filters label {
+    font-weight: bold;
+}
+
+.report-filters input,
+.report-filters select,
+.report-filters button {
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.report-filters button {
+    background-color: #0077b6;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.report-filters button:hover {
+    background-color: #005f8d;
+}
+
+/* Report Display Section */
+.report-display {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .report-card {
-    padding: 20px;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
+    margin: 1rem 0;
 }
 
-.report-card input,
-.report-card textarea {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 4px;
+.report-card h4 {
+    margin-bottom: 1rem;
+    color: #0077b6;
+}
+
+.report-card input[type="text"],
+.report-card textarea,
+.report-card input[type="file"] {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
     border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
 .report-card button {
-    margin: 5px;
-    padding: 8px 16px;
-    background-color: #007bff;
-    color: #fff;
+    padding: 0.6rem 1rem;
+    margin-right: 0.5rem;
+    background-color: #0077b6;
+    color: white;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 .report-card button:hover {
-    background-color: #0056b3;
+    background-color: #005f8d;
 }
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar .container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar nav ul {
+        flex-direction: row;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .navbar nav ul li {
+        text-align: center;
+        width: 100%;
+    }
+
+    .report-filters {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    main.reports {
+        padding: 1rem;
+    }
+}
+
 
     </style>
 </head>
@@ -51,17 +207,16 @@
         <div class="container">
             <h1>Reports</h1>
             <nav>
-                <a href="index.html" onclick="logout()">Logout</a>
+                
                 <ul>
-                    <li><a href="admin.html">Dashboard</a></li>
-                    <li><a href="#bookings">Bookings</a></li>
-                    <li><a href="#billing">Billing</a></li>
-                    <li><a href="#rooms">Rooms</a></li>
-                    <li><a href="sales.html" id="sales">Sales</a></li>
-                    <li><a href="reports.html" id="reports">Reports</a></li>
-                    <li><a href="#" id="users">Employees</a></li>
-                    <li><a href="#profile">Profile</a></li>
-                    <li><a href="index.html" id="logout-btn">Logout</a></li>
+                    <li><a href="manager.html">Dashboard</a></li>
+                    <li><a href="bookings.html" class="active">Bookings</a></li>
+                    <li><a href="rooms.html" class="active">Rooms</a></li>
+                    <li><a href="billing.html" class="active">Billing</a></li>
+                    <li><a href="sales.html" class="active">Sales</a></li>
+                    <li><a href="reports.html" class="active">Reports</a></li>
+                    
+                   
                 </ul>
             </nav>
         </div>
@@ -85,12 +240,12 @@
             <label for="endDate">End Date:</label>
             <input type="date" id="endDate">
 
-            <button onclick="generateReport()">Generate Report</button>
+           
         </section>
 
         <!-- Reports Display Section -->
         <section id="reportSection" class="report-display">
-            <h3>Generated Reports</h3>
+            
             <div class="report-card">
                 <h4>Report Title</h4>
                 <input type="text" id="reportTitle" placeholder="Enter Report Title">
@@ -98,6 +253,7 @@
                 
                 <label for="reportImage">Update Report Image:</label>
                 <input type="file" id="reportImage" accept="image/*">
+                <button onclick="generateReport()">Generate Report</button>
                 <button onclick="updateReport()">Save Changes</button>
 
                 <button onclick="downloadReport()">Download</button>

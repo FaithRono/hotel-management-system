@@ -16,46 +16,45 @@ body {
     height: 100vh;
 }
 
+/* Navbar */
 .navbar {
-    background-color: #2c3e50;
-    color: #ecf0f1;
+    background-color: #333;
+    color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    position: sticky;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
+    padding: 15px 20px;
 }
 
 .navbar h1 {
+    font-size: 24px;
     margin: 0;
 }
 
 .navbar nav ul {
-    list-style-type: none;
+    list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
+    gap: 20px;
 }
 
 .navbar nav ul li {
-    margin: 0 10px;
+    display: inline;
 }
 
 .navbar nav ul li a {
-    color: #ecf0f1;
     text-decoration: none;
-    font-weight: bold;
+    color: #fff;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
-.navbar .menu-toggle {
-    display: none;
-    font-size: 24px;
-    background: none;
-    border: none;
-    color: #ecf0f1;
+.navbar nav ul li a:hover,
+.navbar nav ul li a.active {
+    background-color: #007BFF;
 }
 
 .main-content {
@@ -120,26 +119,36 @@ th, td {
 th {
     background-color: #f4f4f4;
 }
-
-@media (max-width: 768px) {
-    .navbar nav ul {
-        display: none;
-    }
-
-    .navbar .menu-toggle {
-        display: block;
-    }
+.room-status {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-@media (max-width: 480px) {
-    .navbar h1 {
-        font-size: 18px;
-    }
-
-    .navbar nav ul li a {
-        font-size: 14px;
-    }
+.status-card {
+    flex: 1;
+    min-width: 220px;
 }
+
+.status-card h3 {
+    margin-top: 0;
+}
+
+.status-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.status-card li {
+    margin-bottom: 10px;
+}
+
+.status-card img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
 
     </style>
 </head>
@@ -148,15 +157,17 @@ th {
         <h1>Hotel Management</h1>
         <nav>
             <ul>
-                <li><a href="dashboard.html">Dashboard</a></li>
-                <li><a href="./manager/bookings.html">Bookings</a></li>
+                <li><a href="manager.html">Dashboard</a></li>
+                <li><a href="bookings.html">Bookings</a></li>
                 <li><a href="billing.html">Billing</a></li>
                 <li><a href="rooms.html">Rooms</a></li>
+                <li><a href="sales.html">Sales</a></li>
                 <li><a href="reports.html">Reports</a></li>
+
                 <li><a href="#" id="logout-btn">Logout</a></li>
             </ul>
         </nav>
-        <button class="menu-toggle" aria-label="Toggle Menu">☰</button>
+      
     </header>
 
     <main class="main-content">
@@ -192,132 +203,142 @@ th {
             </div>
         </section>
 
-        <!-- Bookings Section -->
-        <section id="bookings">
-            <h2>Bookings</h2>
-            <div class="card">
-                <div class="card-header">Add New Booking</div>
-                <div class="card-content">
-                    <form id="booking-form">
-                        <label for="guest-name">Guest Name:</label>
-                        <input type="text" id="guest-name" placeholder="Enter guest name" required>
-
-                        <label for="check-in">Check-in Date:</label>
-                        <input type="date" id="check-in" required>
-
-                        <label for="check-out">Check-out Date:</label>
-                        <input type="date" id="check-out" required>
-
-                        <label for="room-type">Room Type:</label>
-                        <select id="room-type" required>
-                            <option value="single">Single</option>
-                            <option value="double">Double</option>
-                            <option value="suite">Suite</option>
-                        </select>
-
-                        <button type="button" onclick="addBooking()">Add Booking</button>
-                    </form>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">Booking History</div>
-                <div class="card-content">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Guest Name</th>
-                                <th>Check-in Date</th>
-                                <th>Check-out Date</th>
-                                <th>Room Type</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Example data -->
-                            <tr>
-                                <td>John Doe</td>
-                                <td>2024-09-01</td>
-                                <td>2024-09-05</td>
-                                <td>Double</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
+        
+       
+    
         <!-- Billing Section -->
-        <section id="billing">
-            <h2>Billing</h2>
-            <div class="card">
-                <div class="card-header">Record Daily Expenses</div>
-                <div class="card-content">
-                    <form id="billing-form">
-                        <label for="expense-description">Description:</label>
-                        <input type="text" id="expense-description" placeholder="Expense description" required>
-
-                        <label for="amount">Amount:</label>
-                        <input type="number" id="amount" placeholder="Expense amount" required>
-
-                        <label for="expense-date">Date:</label>
-                        <input type="date" id="expense-date" required>
-
-                        <button type="button" onclick="recordExpense()">Record Expense</button>
-                    </form>
-                </div>
-            </div>
+        
             <div class="card">
                 <div class="card-header">Expense History</div>
                 <div class="card-content">
                     <table>
                         <thead>
                             <tr>
+                                <th>Bill Number</th>
                                 <th>Description</th>
-                                <th>Amount</th>
+                                <th>Category</th>
+                                <th>Amount ($)</th>
+                                <th>Tax Amount ($)</th>
+                                <th>Discount ($)</th>
+                                <th>Total Amount ($)</th>
                                 <th>Date</th>
+                                <th>Payment Status</th>
+                                <th>Vendor/Supplier</th>
+                                <th>Payment Method</th>
+                                <th>Notes</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Example data -->
+                            <!-- Example Data -->
                             <tr>
+                                <td>#001</td>
                                 <td>Food Supplies</td>
-                                <td>$200</td>
+                                <td>Food</td>
+                                <td>200</td>
+                                <td>10</td>
+                                <td>0</td>
+                                <td>210</td>
                                 <td>2024-09-01</td>
+                                <td>Paid</td>
+                                <td>ABC Groceries</td>
+                                <td>Credit Card</td>
+                                <td>Monthly restocking</td>
                             </tr>
+                            <tr>
+                                <td>#002</td>
+                                <td>Room Repairs</td>
+                                <td>Maintenance</td>
+                                <td>500</td>
+                                <td>25</td>
+                                <td>50</td>
+                                <td>475</td>
+                                <td>2024-09-02</td>
+                                <td>Pending</td>
+                                <td>XYZ Maintenance Co.</td>
+                                <td>Bank Transfer</td>
+                                <td>Fixing water leakage</td>
+                            </tr>
+                            <tr>
+                                <td>#003</td>
+                                <td>Electricity Bill</td>
+                                <td>Utility</td>
+                                <td>300</td>
+                                <td>15</td>
+                                <td>0</td>
+                                <td>315</td>
+                                <td>2024-09-03</td>
+                                <td>Overdue</td>
+                                <td>Power Company</td>
+                                <td>Bank Transfer</td>
+                                <td>Due by end of month</td>
+                            </tr>
+                            <!-- More records will be dynamically populated here -->
                         </tbody>
                     </table>
                 </div>
             </div>
         </section>
 
-        <!-- Rooms Section -->
-        <section id="rooms">
-            <h2>Rooms</h2>
-            <div class="card">
-                <div class="card-header">Add New Room</div>
-                <div class="card-content">
-                    <form id="room-form">
-                        <label for="room-number">Room Number:</label>
-                        <input type="text" id="room-number" placeholder="Enter room number" required>
+         <!-- Room Management Section -->
+         <section class="card">
+            <h2>Add/Update Room</h2>
+            <form id="room-form">
+                <label for="room-number">Room Number:</label>
+                <input type="text" id="room-number" name="room-number" placeholder="Enter room number" required>
 
-                        <label for="room-type">Room Type:</label>
-                        <select id="room-type" required>
-                            <option value="single">Single</option>
-                            <option value="double">Double</option>
-                            <option value="suite">Suite</option>
-                        </select>
+                <label for="room-type">Room Type:</label>
+                    <select id="room-type" required>
+                        <option value="single">Single</option>
+                        <option value="double">Double</option>
+                        <option value="suite">Suite</option>
+                    </select>
+                <label for="status">Room Status:</label>
+                <select id="status" name="status" required>
+                    <option value="available">Available</option>
+                    <option value="dirty">Dirty</option>
+                    <option value="under-repair">Under Repair</option>
+                    <option value="booked">Booked</option>
+                </select>
 
-                        <label for="room-status">Status:</label>
-                        <select id="room-status" required>
-                            <option value="available">Available</option>
-                            <option value="booked">Booked</option>
-                            <option value="dirty">Dirty</option>
-                            <option value="repair">Under Repair</option>
-                        </select>
+                <label for="room-photo">Room Photo:</label>
+                <input type="file" id="room-photo" name="room-photo" accept="image/*">
 
-                        <button type="button" onclick="addRoom()">Add Room</button>
-                    </form>
+                <button type="submit">Add Room</button>
+            </form>
+        </section>
+
+         <!-- Room Status Overview Section -->
+         <section class="card room-status-overview">
+            <h2>Room Status Overview</h2>
+            <div class="room-status">
+                <div class="status-card">
+                    <h3>Available Rooms</h3>
+                    <ul>
+                        <li>Room 101 <img src="../image/room-1.png" alt="Room 101"></li>
+                        <li>Room 102 <img src="../image/room-2.png" alt="Room 102"></li>
+                    </ul>
+                </div>
+                <div class="status-card">
+                    <h3>Dirty Rooms</h3>
+                    <ul>
+                        <li>Room 201 <img src="../image/room-3.png" alt="Room 201"></li>
+                    </ul>
+                </div>
+                <div class="status-card">
+                    <h3>Under Repair</h3>
+                    <ul>
+                        <li>Room 301 <img src="../image/room-4.png" alt="Room 301"></li>
+                    </ul>
+                </div>
+                <div class="status-card">
+                    <h3>Booked Rooms</h3>
+                    <ul>
+                        <li>Room 102 <img src="../image/room-6.png" alt="Room 102"></li>
+                    </ul>
                 </div>
             </div>
+        </section>
+       
             <div class="card">
                 <div class="card-header">Room List</div>
                 <div class="card-content">
@@ -343,49 +364,7 @@ th {
         </section>
 
         <!-- Reports Section -->
-        <section id="reports">
-            <h2>Reports</h2>
-            <div class="card">
-                <div class="card-header">Generate Reports</div>
-                <div class="card-content">
-                    <form id="report-form">
-                        <label for="report-type">Report Type:</label>
-                        <select id="report-type" required>
-                            <option value="daily">Daily</option>
-                            <option value="monthly">Monthly</option>
-                            <option value="annual">Annual</option>
-                        </select>
-
-                        <label for="report-date">Date:</label>
-                        <input type="date" id="report-date" required>
-
-                        <button type="button" onclick="generateReport()">Generate Report</button>
-                    </form>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">Reports History</div>
-                <div class="card-content">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Report Type</th>
-                                <th>Date</th>
-                                <th>Generated By</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Example data -->
-                            <tr>
-                                <td>Monthly</td>
-                                <td>2024-09-01</td>
-                                <td>Manager</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
+        
     </main>
 
     <script>
@@ -402,13 +381,9 @@ th {
             // Logic to record expense
         }
 
-        function addRoom() {
-            // Logic to add room
-        }
+      
 
-        function generateReport() {
-            // Logic to generate report
-        }
+       
     </script>
 </body>
 </html>
